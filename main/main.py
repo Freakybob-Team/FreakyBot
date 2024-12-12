@@ -225,7 +225,7 @@ async def on_command_error(ctx, error):
 async def about(ctx):
     await ctx.send("Freakybot is freakycord's **new** moderation bot.")
     time.sleep(1)
-    await ctx.send('Freakybob was originally made using c++ but the bot now uses python.')
+    await ctx.send('FreakyBot was originally made using c++ but the bot now uses python.')
     time.sleep(1)
     await ctx.send('Freakybot was made by: 5quirre1, wish, and nomaakip!')
 

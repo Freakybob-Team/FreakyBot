@@ -1,4 +1,3 @@
-
 from discord.utils import get
 import discord
 from discord.ext import commands
@@ -23,15 +22,15 @@ bot = commands.Bot(command_prefix='!', intents=intents)
 async def on_ready():
 
     await bot.tree.sync()
-    print(f"We have logged in as {bot.user}")
-    game = discord.Game("Protecting Freaks 👅 sim (freakybot 1.1)")
+    print(f"I have logged in as {bot.user}")
+    game = discord.Game("Protecting Freaks 👅 (FreakyBot 1.1)")
     await bot.change_presence(status=discord.Status.online, activity=game)
 
 
 @bot.event
 async def on_message(message):
     if message.author == bot.user or message.author.bot:
-        return
+        return None
 
     designated_channel_id = 1311447896805347348
 
@@ -53,9 +52,6 @@ async def on_message(message):
             except discord.errors.Forbidden:
                 pass
 
-            await message.channel.send(
-                "Make sure to not spam in any other channel except for [Spam Channel](https://discord.com/channels/1277349483633705042/1277352185302220921) plzz ^^"
-            )
             spam_tracker[message.author.id].clear()
 
 
@@ -71,7 +67,7 @@ async def on_message(message):
         'Are you freaky': 'yes 👅',
         'Piplup': 'nerd',
         'freakybob': 'peak https://freakybob.site',
-
+        'gay': 'https://cdn.discordapp.com/attachments/1296598626537312300/1316874630576738324/ec60a7a5-ca73-4194-8b2b-f2647cf394b4.jpg?ex=675ca292&is=675b5112&hm=a2653313a02d101273c5d3e2dbd20ab43dd9f7828616ed4b83f61e27ec6a0ecf&'
     }
 
     if message.content in responses:
@@ -121,16 +117,7 @@ async def kick(ctx, member: discord.Member, *, reason=None):
 async def info(ctx, member: discord.Member):
     member = await ctx.guild.fetch_member(member.id)
     await ctx.send(f'{member.mention} is a member of {ctx.guild.name} since {member.joined_at}.')
-    if member.status == discord.Status.online:
-        await ctx.send('They are currently online!')
-    elif member.status == discord.Status.offline:
-        await ctx.send('They are currently offline!')
-    elif member.status == discord.Status.idle:
-        await ctx.send('They are currently idle!')
-    elif member.status == discord.Status.dnd:
-        await ctx.send('They are currently in Do Not Disturb mode!')
-    else:
-        await ctx.send(f'{member.mention} has an unknown status.')
+    await ctx.send("Warning: If you use this for being a creep, you will be warned.")
 
 @bot.command(name='timeout', help='Timeout a member for a specified duration')
 @commands.has_permissions(moderate_members=True)
@@ -206,29 +193,31 @@ async def hello(ctx):
     await ctx.send('Hello, {0.author.mention}!!'.format(ctx))
 @bot.command(name="hello_everyone", help="Says hello to everyone")
 async def hello_everyone(ctx):
-    await ctx.send('Hello everyone!!! I\'m FreakBot! I\'m Freakcord\'s **new** moderation bot!!!')
+    await ctx.send('Hello everyone!!! I\'m FreakyBot! I\'m Freakcord\'s **new** moderation bot!!!')
 @bot.event
 async def on_command_error(ctx, error):
     
     if isinstance(error, commands.CommandNotFound):
-        await ctx.send('Command not found!')
+        await ctx.send('Command not found! Error: ' + str(error))
     elif isinstance(error, commands.MissingRequiredArgument):
-        await ctx.send('Please provide all required arguments!')
+        await ctx.send('Please provide all required arguments! Error: ' + str(error))
     elif isinstance(error, commands.MissingPermissions):
-        await ctx.send('You do not have the required permissions to use this command!')
+        await ctx.send('You do not have the required permissions to use this command! Error: ' + str(error))
     else:
-        await ctx.send(f'An error occurred: {error}')
+        await ctx.send(f'An error occurred: ' + str(error))
         raise error
 
         
 @bot.command(name="about", help="about freakybot")
 async def about(ctx):
-    await ctx.send("Freakybot is freakycord's **new** moderation bot.")
+    await ctx.send("FreakyBot is Freakcord's **new** moderation bot.")
     time.sleep(1)
-    await ctx.send('FreakyBot was originally made using c++ but the bot now uses python.')
+    await ctx.send('FreakyBot was originally made in C++ but the bot now uses Python and https://railway.app to deploy.')
     time.sleep(1)
-    await ctx.send('Freakybot was made by: 5quirre1, wish, and nomaakip!')
+    await ctx.send('FreakyBot was made by: 5quirre1, Wish13yt, and Nomaakip! (GitHub usernames)')
 
 
-
+@bot.command(name="socials", help="Social networks Freakybob Team is on")
+async def the_socials(ctx):
+    await ctx.send("PikiDiary: https://pikidiary.lol/@freakybob" + "\n Bluesky: https://bsky.app/profile/freakybob.site")
 bot.run('THE_TOKEN') # the token is not here cause safety 

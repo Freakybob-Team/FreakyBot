@@ -1,3 +1,4 @@
+# I should get a cookie cause I'm the main person who cooked on this... - 5quirre1
 from discord.utils import get
 import discord
 from discord.ext import commands
@@ -23,7 +24,8 @@ async def on_ready():
 
     await bot.tree.sync()
     print(f"I have logged in as {bot.user}")
-    game = discord.Game("Protecting Freaks 👅 (FreakyBot 1.1)")
+    game = discord.Game("Protecting President Squirtward 👅 (FreakyBot 1.2)")
+    print("Changed status to: " + str(game))
     await bot.change_presence(status=discord.Status.online, activity=game)
 
 
@@ -191,9 +193,26 @@ async def not_fire(ctx):
 @bot.command(name="hello", help="Says hello")
 async def hello(ctx):
     await ctx.send('Hello, {0.author.mention}!!'.format(ctx))
+    
 @bot.command(name="hello_everyone", help="Says hello to everyone")
 async def hello_everyone(ctx):
     await ctx.send('Hello everyone!!! I\'m FreakyBot! I\'m Freakcord\'s **new** moderation bot!!!')
+    
+@bot.command(name="about", help="about freakybot")
+async def about(ctx):
+    await ctx.send("FreakyBot is Freakcord's **new** moderation bot.")
+    time.sleep(1)
+    await ctx.send('FreakyBot was originally made in C++ but the bot now uses Python and <https://railway.app> to deploy.')
+    time.sleep(1)
+    await ctx.send('FreakyBot was made by: 5quirre1, Wish13yt, and Nomaakip! (GitHub usernames)')
+    time.sleep(1)
+    await ctx.send('5quirre1 was the one that cooked tho, not self glazing trust >:3')
+
+
+@bot.command(name="socials", help="Social networks Freakybob Team is on")
+async def the_socials(ctx):
+    await ctx.send("PikiDiary: https://pikidiary.lol/@freakybob" + "\n Bluesky: https://bsky.app/profile/freakybob.site")
+
 @bot.event
 async def on_command_error(ctx, error):
     
@@ -207,17 +226,4 @@ async def on_command_error(ctx, error):
         await ctx.send(f'An error occurred: ' + str(error))
         raise error
 
-        
-@bot.command(name="about", help="about freakybot")
-async def about(ctx):
-    await ctx.send("FreakyBot is Freakcord's **new** moderation bot.")
-    time.sleep(1)
-    await ctx.send('FreakyBot was originally made in C++ but the bot now uses Python and https://railway.app to deploy.')
-    time.sleep(1)
-    await ctx.send('FreakyBot was made by: 5quirre1, Wish13yt, and Nomaakip! (GitHub usernames)')
-
-
-@bot.command(name="socials", help="Social networks Freakybob Team is on")
-async def the_socials(ctx):
-    await ctx.send("PikiDiary: https://pikidiary.lol/@freakybob" + "\n Bluesky: https://bsky.app/profile/freakybob.site")
 bot.run('THE_TOKEN') # the token is not here cause safety 

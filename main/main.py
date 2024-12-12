@@ -28,7 +28,7 @@ async def on_message(message):
     if message.author == bot.user or message.author.bot:
         return
 
-    designated_channel_id = 1277352185302220921
+    designated_channel_id = 1311447896805347348
 
     if message.channel.id != designated_channel_id:
         user_messages = spam_tracker[message.author.id]
@@ -196,7 +196,12 @@ async def warns(ctx, member: discord.Member):
 @bot.command(name='not_fire', help='this is not fire')
 async def not_fire(ctx):
     await ctx.send('[Not Fire](https://media.discordapp.net/attachments/1251937089440845844/1288338569014018109/caption.gif?ex=675ba74b&is=675a55cb&hm=e158804de82881c469ecb515c0a1fe0aaace069e71d57a2a016e083c5e359d15&=&width=622&height=548)')
-
+@bot.command(name="hello", help="Says hello")
+async def hello(ctx):
+    await ctx.send('Hello, {0.author.mention}!!'.format(ctx))
+@bot.command(name="hello_everyone", help="Says hello to everyone")
+async def hello_everyone(ctx):
+    await ctx.send('Hello everyone!!! I\'m FreakBot! I\'m Freakcord\'s **new** moderation bot!!!')
 @bot.event
 async def on_command_error(ctx, error):
     
@@ -209,7 +214,5 @@ async def on_command_error(ctx, error):
     else:
         await ctx.send(f'An error occurred: {error}')
         raise error
-
-
 
 bot.run('THE_TOKEN') # the token is not here cause safety 

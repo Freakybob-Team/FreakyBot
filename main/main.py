@@ -1,7 +1,11 @@
+
+from discord.utils import get
 import discord
 from discord.ext import commands
 from datetime import timedelta
 from collections import defaultdict
+import time
+
 
 intents = discord.Intents.default()
 intents.message_content = True
@@ -10,6 +14,7 @@ warnings = defaultdict(int)
 SPAM_THRESHOLD = 5
 SPAM_INTERVAL = 6
 spam_tracker = defaultdict(list)
+lmao = 'lmao'
 
 bot = commands.Bot(command_prefix='!', intents=intents)
 
@@ -19,7 +24,7 @@ async def on_ready():
 
     await bot.tree.sync()
     print(f"We have logged in as {bot.user}")
-    game = discord.Game("Protecting Freaks 👅 sim")
+    game = discord.Game("Protecting Freaks 👅 sim (freakybot 1.1)")
     await bot.change_presence(status=discord.Status.online, activity=game)
 
 
@@ -53,26 +58,26 @@ async def on_message(message):
             )
             spam_tracker[message.author.id].clear()
 
+
     responses = {
         'piplup': 'nerd',
         'are you freaky': 'yes 👅',
-        'greg': ('Greg Heffley is peak! '
-                 'https://www.greg.com/images/resized_and_crop/250/200/eyJpZCI6IjgzYWU3NjQ2YjljYWZkYjBiYjAzY2MwY2U2Y2E3NmVmIiwic3RvcmFnZSI6InN0b3JlIn0?signature=87f4495c39748e4459b4f3ad69f5843a9acc005e7b3baa33ccad7d6e47f198dd\ntyler the creator'),
+        'greg' : '[Greg](https://www.greg.com/images/resized_and_crop/250/200/eyJpZCI6IjgzYWU3NjQ2YjljYWZkYjBiYjAzY2MwY2U2Y2E3NmVmIiwic3RvcmFnZSI6InN0b3JlIn0?signature=87f4495c39748e4459b4f3ad69f5843a9acc005e7b3baa33ccad7d6e47f198dd) Heffley is peak!\nntyler the creator ',
         'chair': '[chair](https://theamishhouse.com/cdn/shop/products/theodore-side-chair-260327_847ac408-9f9f-4ba3-8dbc-10a9fc08257d.jpg?crop=center&height=1200&v=1611462911&width=1200)',
         'car': '[car](https://media.discordapp.net/attachments/1296598626537312300/1316646229513338931/IMG_1305.jpg?ex=675bcddb&is=675a7c5b&hm=0c497865de724aea018e846b8e5da0376b30782977bdb11f8e6c5ea7f4ee323c&=&format=webp&width=375&height=375)',
         'Car': '[car](https://media.discordapp.net/attachments/1296598626537312300/1316646229513338931/IMG_1305.jpg?ex=675bcddb&is=675a7c5b&hm=0c497865de724aea018e846b8e5da0376b30782977bdb11f8e6c5ea7f4ee323c&=&format=webp&width=375&height=375)',
-        'Greg': ('Greg Heffley is peak! '
-                 'https://www.greg.com/images/resized_and_crop/250/200/eyJpZCI6IjgzYWU3NjQ2YjljYWZkYjBiYjAzY2MwY2U2Y2E3NmVmIiwic3RvcmFnZSI6InN0b3JlIn0?signature=87f4495c39748e4459b4f3ad69f5843a9acc005e7b3baa33ccad7d6e47f198dd\ntyler the creator'),
+        'Greg': ('[Greg](https://www.greg.com/images/resized_and_crop/250/200/eyJpZCI6IjgzYWU3NjQ2YjljYWZkYjBiYjAzY2MwY2U2Y2E3NmVmIiwic3RvcmFnZSI6InN0b3JlIn0?signature=87f4495c39748e4459b4f3ad69f5843a9acc005e7b3baa33ccad7d6e47f198dd) Heffley is peak!\nntyler the creator '),
         'Chair': '[chair](https://theamishhouse.com/cdn/shop/products/theodore-side-chair-260327_847ac408-9f9f-4ba3-8dbc-10a9fc08257d.jpg?crop=center&height=1200&v=1611462911&width=1200)',
         'Are you freaky': 'yes 👅',
         'Piplup': 'nerd',
+        'freakybob': 'peak https://freakybob.site',
+
     }
 
     if message.content in responses:
         await message.channel.send(responses[message.content])
 
     await bot.process_commands(message)
-
 
 @bot.event
 async def on_member_join(member):
@@ -214,5 +219,16 @@ async def on_command_error(ctx, error):
     else:
         await ctx.send(f'An error occurred: {error}')
         raise error
+
+        
+@bot.command(name="about", help="about freakybot")
+async def about(ctx):
+    await ctx.send("Freakybot is freakycord's **new** moderation bot.")
+    time.sleep(1)
+    await ctx.send('Freakybob was originally made using c++ but the bot now uses python.')
+    time.sleep(1)
+    await ctx.send('Freakybot was made by: 5quirre1, wish, and nomaakip!')
+
+
 
 bot.run('THE_TOKEN') # the token is not here cause safety 

@@ -28,7 +28,7 @@ async def on_message(message):
     if message.author == bot.user or message.author.bot:
         return
 
-    designated_channel_id = 1311447896805347348
+    designated_channel_id = 1277352185302220921
 
     if message.channel.id != designated_channel_id:
         user_messages = spam_tracker[message.author.id]
